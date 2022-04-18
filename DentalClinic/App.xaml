@@ -1,0 +1,32 @@
+﻿<Application x:Class="DentalClinic.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DentalClinic"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <hc:ThemeResources>
+                    <hc:ThemeResources.ThemeDictionaries>
+                        
+
+                        <ResourceDictionary x:Key="Dark" hc:ThemeDictionary.Key="Dark">
+
+                            <!-- Put the resources you want to use in the Dark theme Here -->
+
+                            <SolidColorBrush x:Key="PrimaryBrush" Color="Green" />
+                            <SolidColorBrush x:Key="AppBackgroundBrush" Color="#FF232323" />
+                        </ResourceDictionary>
+                    </hc:ThemeResources.ThemeDictionaries>
+                </hc:ThemeResources>
+                <hc:Theme/>
+            </ResourceDictionary.MergedDictionaries>
+            <FontFamily x:Key="LexendDeca">pack://application:,,,/Resources/fonts/LexendDeca.ttf#LexendDeca</FontFamily>
+        </ResourceDictionary>
+
+
+
+        
+    </Application.Resources>
+</Application>

@@ -1,0 +1,24 @@
+﻿<Page x:Class="DentalClinic.Pages.Service"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DentalClinic.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Service">
+
+    <Grid>
+        <StackPanel VerticalAlignment="Center" Margin="0,10,0,0" Width="147" >
+            <Button Click="Button_Click_8" Content="Enroll page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
+            <Button Click="Button_Click_1" Content="Conclusion page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
+            <Button Click="Button_Click_2" Content="Diary page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
+            <Button Click="Button_Click_3" Content="Patient list page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
+            <Button Click="Button_Click_4" Content="Patient profile page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
+            <Button Click="Button_Click_5" Content="MKB page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
+            <Button Click="Button_Click_7" Content="Patient edit page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
+
+
+        </StackPanel>
+    </Grid>
+</Page>

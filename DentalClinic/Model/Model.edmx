@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище ArmDentalModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="appointment">
+          <Key>
+            <PropertyRef Name="id_appointment" />
+          </Key>
+          <Property Name="id_appointment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="date_app" Type="datetime" Nullable="false" />
+          <Property Name="reason" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="denstist">
+          <Key>
+            <PropertyRef Name="id_denstist" />
+          </Key>
+          <Property Name="id_denstist" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="denstist_first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="denstist_last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="speciality" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="login_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="id_login" />
+          </Key>
+          <Property Name="id_login" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="med_history">
+          <Key>
+            <PropertyRef Name="id_history" />
+          </Key>
+          <Property Name="id_history" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="x_ray" Type="nvarchar" MaxLength="50" />
+          <Property Name="fase" Type="nvarchar" MaxLength="100" />
+          <Property Name="desease" Type="nvarchar" MaxLength="50" />
+          <Property Name="medication_prior" Type="nvarchar" MaxLength="100" />
+          <Property Name="prescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="dentist_id" Type="int" Nullable="false" />
+          <Property Name="current_health" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="mkb_codes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="patients">
+          <Key>
+            <PropertyRef Name="id_patient" />
+          </Key>
+          <Property Name="id_patient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="patient_last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_of_birth" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_appointment_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="appointment" Type="Self.appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="id_patient" />
+            </Principal>
+            <Dependent Role="appointment">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_denstist_login">
+          <End Role="login" Type="Self.login" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="denstist" Type="Self.denstist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login">
+              <PropertyRef Name="id_login" />
+            </Principal>
+            <Dependent Role="denstist">
+              <PropertyRef Name="login_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_med_history_denstist">
+          <End Role="denstist" Type="Self.denstist" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="med_history" Type="Self.med_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="denstist">
+              <PropertyRef Name="id_denstist" />
+            </Principal>
+            <Dependent Role="med_history">
+              <PropertyRef Name="dentist_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_med_history_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="med_history" Type="Self.med_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="id_patient" />
+            </Principal>
+            <Dependent Role="med_history">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ArmDentalModelContainer">
+          <EntitySet Name="appointment" EntityType="Self.appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="denstist" EntityType="Self.denstist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="med_history" EntityType="Self.med_history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mkb_codes" EntityType="Self.mkb_codes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patients" EntityType="Self.patients" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_appointment_patients" Association="Self.FK_appointment_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="appointment" EntitySet="appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_denstist_login" Association="Self.FK_denstist_login">
+            <End Role="login" EntitySet="login" />
+            <End Role="denstist" EntitySet="denstist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_med_history_denstist" Association="Self.FK_med_history_denstist">
+            <End Role="denstist" EntitySet="denstist" />
+            <End Role="med_history" EntitySet="med_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_med_history_patients" Association="Self.FK_med_history_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="med_history" EntitySet="med_history" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ArmDentalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ArmDentalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="appointment" EntityType="ArmDentalModel.appointment" />
+          <EntitySet Name="denstist" EntityType="ArmDentalModel.denstist" />
+          <EntitySet Name="login" EntityType="ArmDentalModel.login" />
+          <EntitySet Name="med_history" EntityType="ArmDentalModel.med_history" />
+          <EntitySet Name="mkb_codes" EntityType="ArmDentalModel.mkb_codes" />
+          <EntitySet Name="patients" EntityType="ArmDentalModel.patients" />
+          <AssociationSet Name="FK_appointment_patients" Association="ArmDentalModel.FK_appointment_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="appointment" EntitySet="appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_denstist_login" Association="ArmDentalModel.FK_denstist_login">
+            <End Role="login" EntitySet="login" />
+            <End Role="denstist" EntitySet="denstist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_med_history_denstist" Association="ArmDentalModel.FK_med_history_denstist">
+            <End Role="denstist" EntitySet="denstist" />
+            <End Role="med_history" EntitySet="med_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_med_history_patients" Association="ArmDentalModel.FK_med_history_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="med_history" EntitySet="med_history" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="appointment">
+          <Key>
+            <PropertyRef Name="id_appointment" />
+          </Key>
+          <Property Name="id_appointment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="date_app" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="reason" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="patients" Relationship="ArmDentalModel.FK_appointment_patients" FromRole="appointment" ToRole="patients" />
+        </EntityType>
+        <EntityType Name="denstist">
+          <Key>
+            <PropertyRef Name="id_denstist" />
+          </Key>
+          <Property Name="id_denstist" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="denstist_first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="denstist_last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="speciality" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="login_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="login" Relationship="ArmDentalModel.FK_denstist_login" FromRole="denstist" ToRole="login" />
+          <NavigationProperty Name="med_history" Relationship="ArmDentalModel.FK_med_history_denstist" FromRole="denstist" ToRole="med_history" />
+        </EntityType>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="id_login" />
+          </Key>
+          <Property Name="id_login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="denstist" Relationship="ArmDentalModel.FK_denstist_login" FromRole="login" ToRole="denstist" />
+        </EntityType>
+        <EntityType Name="med_history">
+          <Key>
+            <PropertyRef Name="id_history" />
+          </Key>
+          <Property Name="id_history" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="x_ray" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fase" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="desease" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="medication_prior" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="prescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dentist_id" Type="Int32" Nullable="false" />
+          <Property Name="current_health" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="denstist" Relationship="ArmDentalModel.FK_med_history_denstist" FromRole="med_history" ToRole="denstist" />
+          <NavigationProperty Name="patients" Relationship="ArmDentalModel.FK_med_history_patients" FromRole="med_history" ToRole="patients" />
+        </EntityType>
+        <EntityType Name="mkb_codes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="patients">
+          <Key>
+            <PropertyRef Name="id_patient" />
+          </Key>
+          <Property Name="id_patient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="patient_last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="appointment" Relationship="ArmDentalModel.FK_appointment_patients" FromRole="patients" ToRole="appointment" />
+          <NavigationProperty Name="med_history" Relationship="ArmDentalModel.FK_med_history_patients" FromRole="patients" ToRole="med_history" />
+        </EntityType>
+        <Association Name="FK_appointment_patients">
+          <End Type="ArmDentalModel.patients" Role="patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ArmDentalModel.appointment" Role="appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="id_patient" />
+            </Principal>
+            <Dependent Role="appointment">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_denstist_login">
+          <End Type="ArmDentalModel.login" Role="login" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ArmDentalModel.denstist" Role="denstist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login">
+              <PropertyRef Name="id_login" />
+            </Principal>
+            <Dependent Role="denstist">
+              <PropertyRef Name="login_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_med_history_denstist">
+          <End Type="ArmDentalModel.denstist" Role="denstist" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ArmDentalModel.med_history" Role="med_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="denstist">
+              <PropertyRef Name="id_denstist" />
+            </Principal>
+            <Dependent Role="med_history">
+              <PropertyRef Name="dentist_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_med_history_patients">
+          <End Type="ArmDentalModel.patients" Role="patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ArmDentalModel.med_history" Role="med_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="id_patient" />
+            </Principal>
+            <Dependent Role="med_history">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ArmDentalModelContainer" CdmEntityContainer="ArmDentalEntities">
+          <EntitySetMapping Name="appointment">
+            <EntityTypeMapping TypeName="ArmDentalModel.appointment">
+              <MappingFragment StoreEntitySet="appointment">
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="date_app" ColumnName="date_app" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="id_appointment" ColumnName="id_appointment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="denstist">
+            <EntityTypeMapping TypeName="ArmDentalModel.denstist">
+              <MappingFragment StoreEntitySet="denstist">
+                <ScalarProperty Name="login_id" ColumnName="login_id" />
+                <ScalarProperty Name="speciality" ColumnName="speciality" />
+                <ScalarProperty Name="denstist_last_name" ColumnName="denstist_last_name" />
+                <ScalarProperty Name="denstist_first_name" ColumnName="denstist_first_name" />
+                <ScalarProperty Name="id_denstist" ColumnName="id_denstist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="login">
+            <EntityTypeMapping TypeName="ArmDentalModel.login">
+              <MappingFragment StoreEntitySet="login">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login1" ColumnName="login" />
+                <ScalarProperty Name="id_login" ColumnName="id_login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="med_history">
+            <EntityTypeMapping TypeName="ArmDentalModel.med_history">
+              <MappingFragment StoreEntitySet="med_history">
+                <ScalarProperty Name="current_health" ColumnName="current_health" />
+                <ScalarProperty Name="dentist_id" ColumnName="dentist_id" />
+                <ScalarProperty Name="prescription" ColumnName="prescription" />
+                <ScalarProperty Name="medication_prior" ColumnName="medication_prior" />
+                <ScalarProperty Name="desease" ColumnName="desease" />
+                <ScalarProperty Name="fase" ColumnName="fase" />
+                <ScalarProperty Name="x_ray" ColumnName="x_ray" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="id_history" ColumnName="id_history" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mkb_codes">
+            <EntityTypeMapping TypeName="ArmDentalModel.mkb_codes">
+              <MappingFragment StoreEntitySet="mkb_codes">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patients">
+            <EntityTypeMapping TypeName="ArmDentalModel.patients">
+              <MappingFragment StoreEntitySet="patients">
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="patient_last_name" ColumnName="patient_last_name" />
+                <ScalarProperty Name="patient_first_name" ColumnName="patient_first_name" />
+                <ScalarProperty Name="id_patient" ColumnName="id_patient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

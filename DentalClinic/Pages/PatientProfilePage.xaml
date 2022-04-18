@@ -1,0 +1,117 @@
+﻿<Page x:Class="DentalClinic.Pages.PatientProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DentalClinic.Pages"
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PatientProfilePage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition />
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="172"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock FontFamily="{StaticResource LexendDeca}" Text="Patient profile" Grid.ColumnSpan="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" Foreground="White" />
+        <Border BorderBrush="#535353" CornerRadius="10" BorderThickness="4" Grid.Row="1" Margin="10">
+            <StackPanel x:Name="NamePatientStack"   Background="#535353">
+                <TextBlock Text="First name" FontFamily="{StaticResource LexendDeca}" Foreground="White" Margin="5,5,0,0" />
+                <TextBlock x:Name="FirstNameTextBox"  Text="{Binding ElementName=FirstNameTextBox, Path=Text}" Foreground="White" Margin="5"  />
+                <TextBlock Text="Last name" FontFamily="{StaticResource LexendDeca}" Foreground="White" Margin="5,0,0,0"/>
+                <TextBlock x:Name="LastNameTextBox" Margin="5" Text="{Binding ElementName=LastNameTextBox, Path=Text}" Foreground="white"/>
+                <Button Content="Edit" Background="#4E97FC" BorderBrush="Transparent" />
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" >
+            <Button x:Name="EnrollButton" Click="EnrollButton_Click" Content="Enroll" Grid.Column="0" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White" Margin="40,0,0,0">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
+            <Button Content="Export data" Grid.Column="0" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White" Margin="40,10,0,0">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
+            <Button Content="Referral" Grid.Column="0" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White" Margin="0,0,40,0">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
+            <Button Content="Empty" Grid.Column="0" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White" Margin="0,10,40,0">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
+        </StackPanel>
+
+        
+           
+                <ListView Grid.Row="2" Grid.RowSpan="3" Grid.ColumnSpan="4" x:Name="PatientMedHistory" 
+                  HorizontalAlignment="Stretch"
+                          Margin="10"
+                  SelectionMode="Single"
+                  SelectionChanged="PatientMedHistory_SelectionChanged">
+                    
+                    <ListView.View>
+                        <GridView >
+                            <GridViewColumn Header="X-ray" DisplayMemberBinding="{Binding x_ray}"/>
+                            <GridViewColumn Header="Allergy" DisplayMemberBinding="{Binding allergy}"/>
+                            <GridViewColumn Header="Desease" DisplayMemberBinding="{Binding desease}"/>
+                            <GridViewColumn Header="Medicines" DisplayMemberBinding="{Binding medication_prior}"/>
+                            <GridViewColumn Header="Prescription" DisplayMemberBinding="{Binding prescription}"/>
+                            <GridViewColumn Header="Current health" DisplayMemberBinding="{Binding current_health}"/>
+                            
+                            
+                            <!--<GridViewColumn Header="Desease" DisplayMemberBinding="{Binding date_of_birth, StringFormat={}{0:dd MMM yyyy}}"/>-->
+                            
+                            
+                            <!--<GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="LookMedHistoryButton"
+                       Margin="0"
+                       VerticalAlignment="Center"
+                       Click="LookMedHistoryButton_Click"  Background="Transparent" BorderBrush="Transparent" Height="40" Width="45">
+                                            <Image Source="/Resources/icons8-appointment-60.png" Width="20" Height="20" >
+                                                <Image.Style>
+                                                    <Style TargetType="{x:Type Image}">
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Effect">
+                                                                    <Setter.Value>
+                                                                        <DropShadowEffect ShadowDepth="0" Color="#535353" Opacity="2" BlurRadius="50"/>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>-->
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+           
+    </Grid>
+</Page>
