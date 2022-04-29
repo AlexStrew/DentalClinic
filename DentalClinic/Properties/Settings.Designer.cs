@@ -46,5 +46,41 @@ namespace DentalClinic.Properties {
                 this["patientSave"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MKBCode {
+            get {
+                return ((string)(this["MKBCode"]));
+            }
+            set {
+                this["MKBCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int patientFirst {
+            get {
+                return ((int)(this["patientFirst"]));
+            }
+            set {
+                this["patientFirst"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string patientLast {
+            get {
+                return ((string)(this["patientLast"]));
+            }
+            set {
+                this["patientLast"] = value;
+            }
+        }
     }
 }

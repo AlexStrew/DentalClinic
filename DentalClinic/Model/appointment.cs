@@ -16,8 +16,9 @@ namespace DentalClinic.Model
     {
         public int id_appointment { get; set; }
         public int patient_id { get; set; }
-        public System.DateTime date_app { get; set; }
+        public Nullable<System.DateTime> date_app { get; set; }
         public string reason { get; set; }
+        public string description { get; set; }
     
         public virtual patients patients { get; set; }
     }

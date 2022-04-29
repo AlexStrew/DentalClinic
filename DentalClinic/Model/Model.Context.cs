@@ -26,10 +26,10 @@ namespace DentalClinic.Model
         }
     
         public virtual DbSet<appointment> appointment { get; set; }
-        public virtual DbSet<denstist> denstist { get; set; }
         public virtual DbSet<login> login { get; set; }
         public virtual DbSet<med_history> med_history { get; set; }
         public virtual DbSet<mkb_codes> mkb_codes { get; set; }
         public virtual DbSet<patients> patients { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

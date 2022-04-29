@@ -12,7 +12,7 @@
         <StackPanel VerticalAlignment="Center" Margin="0,10,0,0" Width="147" >
             <Button Click="Button_Click_8" Content="Enroll page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
             <Button Click="Button_Click_1" Content="Conclusion page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
-            <Button Click="Button_Click_2" Content="Diary page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
+            <Button Click="Button_Click_2" Content="Booked" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
             <Button Click="Button_Click_3" Content="Patient list page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
             <Button Click="Button_Click_4" Content="Patient profile page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>
             <Button Click="Button_Click_5" Content="MKB page" Margin="0,10,0,0" Width="147" Background="#FF4E97FC"/>

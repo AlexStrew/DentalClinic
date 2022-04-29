@@ -28,7 +28,8 @@ namespace DentalClinic.Pages
         {
             InitializeComponent();
 
-           
+
+
 
             List<string> sortTypeList = new List<string>()
             {
@@ -36,17 +37,7 @@ namespace DentalClinic.Pages
             };
             SortComboBox.ItemsSource = sortTypeList;
 
-            //patientList = new List<patients>
-            //{
-            //    new patients()
-            //    {
-            //        id_patient = 0,
-            //        patient_first_name ="имя"
-            //    }
-            //};
-            //patientList.AddRange(db.context.patients.ToList());
-            //FilterComboBox.ItemsSource = patientList;
-
+        
             patientList = db.context.patients.ToList();
             PatientListView.ItemsSource = patientList;
 
@@ -54,9 +45,18 @@ namespace DentalClinic.Pages
             {
                 Console.WriteLine(item.patient_first_name);
             }
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(PatientListView.ItemsSource);
+            view.Filter = UserFilter;
             UpdateUI();
         }
-       
+
+        private bool UserFilter(object item)
+        {
+            if (String.IsNullOrEmpty(SearchTextBox.Text))
+                return true;
+            else
+                return ((item as patients).patient_last_name.IndexOf(SearchTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
 
         private void DescriptionTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -65,12 +65,14 @@ namespace DentalClinic.Pages
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            CollectionViewSource.GetDefaultView(PatientListView.ItemsSource).Refresh();
+
         }
+
 
         private void AddPatientButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new AddPage());
         }
 
         private void PatientListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -80,35 +82,10 @@ namespace DentalClinic.Pages
 
         private void UpdateUI()
         {
-            //List<patients> displayProduct = GetRows().ToList();
-            //PatientListView.ItemsSource = displayProduct; //db.context.Product.ToList();
-
+          
         }
 
-        //private List<patients> GetRows()
-        //{
-        //    List<patients> arrayPatients = db.context.patients.ToList();
-        //    string searchData = SearchTextBox.Text.ToUpper();
-        //    if (!String.IsNullOrEmpty(SearchTextBox.Text))
-        //    {
-        //        arrayPatients = arrayPatients.Where(x => x.patient_first_name.ToUpper().Split().Contains(searchData)).ToList();
-        //        //arrayPatients = arrayPatients.Where(x => x.patient_last_name.ToUpper().Split().Contains(searchData)).ToList();
-        //        //arrayProduct = arrayProduct.Where(x => LevenshteinDistance(x.Title.ToUpper(),searchData)<=6).ToList();
-        //    }
-
-        //    int filter = Convert.ToInt32(FilterComboBox.SelectedValue);
-        //    if (FilterComboBox.SelectedIndex == 0 || filtercombobox.selecteditem == null) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //    {
-        //        arrayPatients = arrayPatients.ToList();
-        //    }
-        //    else
-        //    {
-        //        arrayPatients = arrayPatients.Where(x => x.id_patient == filter).ToList();
-        //    }
-
-        //    return arrayPatients;
-        //}
-
+   
 
 
 
@@ -122,7 +99,6 @@ namespace DentalClinic.Pages
 
         private void ReverseButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateUI();
         }
 
         private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -135,10 +111,7 @@ namespace DentalClinic.Pages
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void EnrollButton_Click(object sender, RoutedEventArgs e)
         {
@@ -151,6 +124,40 @@ namespace DentalClinic.Pages
             this.NavigationService.Navigate(new PatientProfilePage());
         }
 
-  
+
+
+
+        private void DelPatientButton_Click(object sender, RoutedEventArgs e)
+        {
+            var item = PatientListView.SelectedItem as patients;
+            if (item == null)
+
+            {
+
+                MessageBox.Show("Вы не выбрали ни одной строки");
+
+                return;
+
+            }
+
+            else
+            {
+
+
+                MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить строку?", "Удаление", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+
+
+                    db.context.patients.Remove(item);
+
+                    db.context.SaveChanges();
+
+                    MessageBox.Show("Информация удалена");
+                }
+                PatientListView.ItemsSource = db.context.patients.ToList();
+            }
+        }
     }
 }

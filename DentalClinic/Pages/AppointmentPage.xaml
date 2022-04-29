@@ -33,7 +33,7 @@
 
         <StackPanel x:Name="BookingDateStack" Grid.Row="1" Grid.Column="1" Margin="10">
             <TextBlock Text="Booking date*" Foreground="White" />
-            <hc:DateTimePicker>
+            <hc:DateTimePicker x:Name="DateTimePickerSelector">
                 <hc:DateTimePicker.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </hc:DateTimePicker.Effect>
@@ -60,12 +60,12 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="Sample" Grid.Column="0" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White">
+            <Button IsEnabled="False" Content="Sample" x:Name="Sample" Click="Sample_Click" Grid.Column="0" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </Button.Effect>
             </Button>
-            <Button Content="Enroll" Grid.Column="1" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White">
+            <Button x:Name="EnrollButton" Click="EnrollButton_Click" Content="Enroll" Grid.Column="1" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </Button.Effect>

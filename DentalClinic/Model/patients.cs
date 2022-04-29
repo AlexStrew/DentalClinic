@@ -25,6 +25,8 @@ namespace DentalClinic.Model
         public string patient_first_name { get; set; }
         public string patient_last_name { get; set; }
         public System.DateTime date_of_birth { get; set; }
+        public string allergy { get; set; }
+        public string teeth_map { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<appointment> appointment { get; set; }

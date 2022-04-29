@@ -28,7 +28,7 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-        <Button Grid.Row="1" Content="Добавить" x:Name="AddButton"/>
-        <Button Grid.Column="1" Grid.Row="1" x:Name="DelButton"  Content="Удалить"/>
+        <Button IsEnabled="False" Grid.Row="1" Content="Add" x:Name="AddButton" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White"/>
+        <Button IsEnabled="False" Grid.Column="1" Grid.Row="1" x:Name="DelButton"  Content="Delete" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White"/>
     </Grid>
 </Page>
