@@ -31,11 +31,11 @@
             <TextBlock Text="Last Name*" Foreground="White" />
             <hc:TextBox x:Name="LastNameTextBox" Margin="0,0,0,10"/>
             <TextBlock Text="DOB*" Foreground="White" />
-            <hc:DateTimePicker Margin="0,0,0,10">
-                <hc:DateTimePicker.Effect>
+            <hc:DatePicker Margin="0,0,0,10">
+                <hc:DatePicker.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
-                </hc:DateTimePicker.Effect>
-            </hc:DateTimePicker>
+                </hc:DatePicker.Effect>
+            </hc:DatePicker>
             <Button x:Name="SaveButton" Click="SaveButton_Click" Content="Save" Grid.Column="1" Width="100" Height="30" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>

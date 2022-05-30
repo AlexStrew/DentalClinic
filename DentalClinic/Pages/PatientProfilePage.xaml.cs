@@ -44,6 +44,7 @@ namespace DentalClinic.Pages
                     FirstNameTextBox.Text = (string)patientsData.patient_first_name;
                     LastNameTextBox.Text = (string)patientsData.patient_last_name;
                     AllergyTextBox.Text = (string)patientsData.allergy;
+                    TeethTextBox.Text = (string)patientsData.teeth_map;
 
                 }
 
@@ -133,11 +134,31 @@ namespace DentalClinic.Pages
 
         private void TeethMapButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("In developing...");
+            MessageBox.Show("In developing... Maybe??");
             TeethMapView win = new TeethMapView();
             if (win.ShowDialog() == true)
             {
-                Console.WriteLine("ok");
+                patients clientData = db.context.patients.Where(x => x.id_patient == Properties.Settings.Default.patientSave).FirstOrDefault();
+                int selectedPatient = clientData.id_patient;
+                //db.context.patients.Where(x => x.id_patient == selectedPatient).First().allergy = AllergyTextBox.Text.ToString();
+                //patients teethAdd = new patients()
+                //{
+                //    teeth_map = Properties.Settings.Default.teethMapArray
+                //};
+                db.context.patients.Where(x => x.id_patient == selectedPatient).First().teeth_map = Properties.Settings.Default.teethMapArray;
+                db.context.SaveChanges();
+                MessageBox.Show("Success");
+            }
+        }
+
+
+
+        private void RefferalButton_Click(object sender, RoutedEventArgs e)
+        {
+            WordWindow win = new WordWindow();
+            if (win.ShowDialog() == true)
+            {
+
             }
         }
     }

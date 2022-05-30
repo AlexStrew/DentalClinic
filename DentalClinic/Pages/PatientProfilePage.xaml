@@ -37,6 +37,7 @@
                 <Button Content="Edit" x:Name="EditButtonPage" Click="EditButtonPage_Click" Background="#4E97FC" BorderBrush="Transparent" />
             </StackPanel>
         </Border>
+        
 
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" >
             <Button x:Name="EnrollButton" Click="EnrollButton_Click" Content="Enroll" Grid.Column="0" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White" Margin="40,0,0,0">
@@ -57,7 +58,7 @@
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </Button.Effect>
             </Button>
-            <Button IsEnabled="False" Content="Empty" Grid.Column="0" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White" Margin="0,10,40,0">
+            <Button IsEnabled="True" x:Name="RefferalButton" Click="RefferalButton_Click" Content="Refferal" Grid.Column="0" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White" Margin="0,10,40,0" >
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </Button.Effect>
@@ -72,6 +73,11 @@
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </Button.Effect>
             </Button>
+        </StackPanel>
+
+        <StackPanel x:Name="TeethStack" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Margin="5">
+            <TextBlock Text="Teeth" Foreground="White"/>
+            <TextBox Height="100" x:Name="TeethTextBox"/>
         </StackPanel>
 
 
@@ -94,6 +100,7 @@
                     <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding cost}"/>
                     <GridViewColumn Header="Description" DisplayMemberBinding="{Binding description}"/>
                     <GridViewColumn Header="Service" DisplayMemberBinding="{Binding mkb}"/>
+                     
                 </GridView>
             </ListView.View>
         </ListView>

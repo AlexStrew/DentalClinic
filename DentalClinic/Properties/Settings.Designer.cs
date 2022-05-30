@@ -82,5 +82,17 @@ namespace DentalClinic.Properties {
                 this["patientLast"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string teethMapArray {
+            get {
+                return ((string)(this["teethMapArray"]));
+            }
+            set {
+                this["teethMapArray"] = value;
+            }
+        }
     }
 }

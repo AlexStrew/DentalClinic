@@ -1,0 +1,34 @@
+﻿<Window x:Class="DentalClinic.Views.ConsumablesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DentalClinic.Views"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        mc:Ignorable="d"
+        Title="ConsumablesWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="200">
+            <TextBlock Text="Nozzle"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="NozzleTextBox"/>
+            <TextBlock Text="Anesthesia"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="AnestTextBox"/>
+            <TextBlock Text="Crown"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="CrownTextBox"/>
+            <TextBlock Text="Gel"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="GelTextBox"/>
+            <TextBlock Text="Vitamins"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="VitaTextBox"/>
+            <TextBlock Text="Basic tools"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="BasicTextBox"/>
+
+            <Button
+                x:Name="SaveConsumablesButton" 
+                Click="SaveConsumablesButton_Click"
+                Content="Save"
+                HorizontalAlignment="Center" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White"
+                Margin="0,10,0,0"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

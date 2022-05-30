@@ -61,12 +61,12 @@ namespace DentalClinic.Pages
             HealthCombo.SelectedIndex = 0;
 
             DeseaseCombo.ItemsSource = deseaseStr;
-            DeseaseCombo.SelectedIndex = 0;
+            DeseaseCombo.SelectedItem = 0;
 
             xRayCombo.ItemsSource = xrayStr;
             xRayCombo.SelectedIndex = 0;
 
-
+            
 
 
 
@@ -94,30 +94,66 @@ namespace DentalClinic.Pages
                 TestText.Text = Properties.Settings.Default.MKBCode;                
                 Console.WriteLine( "--" + Properties.Settings.Default.MKBCode + "--");
             }
+            
 
         }
 
         private void ConclusionSaveButton_Click(object sender, RoutedEventArgs e)
         {
+            consumables newCon = new consumables()
+            {
+                nozzle = Convert.ToInt32(NozzleTextBox.Text),
+                anesthesia = Convert.ToInt32(AnestTextBox.Text),
+                crown = Convert.ToInt32(CrownTextBox.Text),
+                gel = Convert.ToInt32(GelTextBox.Text),
+                vitamins = Convert.ToInt32(VitaTextBox.Text),
+                basic_tools = Convert.ToInt32(BasicTextBox.Text),
+
+            };
+            
+            db.context.consumables.Add(newCon);
+            db.context.SaveChanges();
+
             med_history newPatient = new med_history()
             {
                 patient_id = Properties.Settings.Default.patientFirst,
                 x_ray = xRayCombo.SelectedItem.ToString(),
                 fase = FaseCombo.SelectedItem.ToString(),
-                desease = DeseaseCombo.SelectedItem.ToString(),
+                desease = DeseaseCombo.SelectedValue.ToString(),
                 current_health = HealthCombo.SelectedItem.ToString(),
                 description = DescriptionTextBox.Text,
                 complication = ComplicationCombo.SelectedItem.ToString(),
                 stage = StageCombo.SelectedItem.ToString(),
                 mkb = TestText.Text,
-                cost = Convert.ToInt32(currencyTextBox.Text)
+                cost = Convert.ToInt32(currencyTextBox.Text),
+                consumable_id = newCon.id_consumable
 
             };
 
+            
+
+            
             db.context.med_history.Add(newPatient);
             db.context.SaveChanges();
             MessageBox.Show("Success");
+
+
+            ////var item = PatientListView.SelectedItem as patients;
+            //patients clientData = db.context.patients.Where(x => x.id_patient == Properties.Settings.Default.patientFirst).FirstOrDefault();
+            //appointment app_id_pat = new appointment();
+            //if (clientData != null)
+            //{
+            //    int selectedPatient = clientData.id_patient;           
+            //    app_id_pat.patient_id = selectedPatient;
+            //    db.context.appointment.Remove(app_id_pat);
+            //    db.context.SaveChanges();
+            //}
+            
             this.NavigationService.Navigate(new DoctorPage());
         }
+
+   
+
+     
     }
 }

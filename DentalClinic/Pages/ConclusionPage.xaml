@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DentalClinic.Pages"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       xmlns:hc="https://handyorg.github.io/handycontrol"
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
     x:Class="DentalClinic.Pages.ConclusionPage"
@@ -22,7 +23,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="140"/>
             <RowDefinition Height="120"/>
             <RowDefinition />
             <RowDefinition Height="50"/>
@@ -63,6 +64,8 @@
                 </hc:ComboBox.Effect>
 
             </hc:ComboBox>
+            <TextBlock Text="Basic tools"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="BasicTextBox"/>
         </StackPanel>
 
         <StackPanel x:Name="ComplicationStack" Grid.Column="3" Grid.Row="1" Margin="5,5,5,5">
@@ -117,17 +120,47 @@
                 </hc:ComboBox.Effect>
             </hc:ComboBox>
             <TextBlock Text="Desease*" Foreground="White" />
-            <hc:ComboBox x:Name="DeseaseCombo"  >
-                <hc:ComboBox.Effect>
+            <!--<hc:CheckComboBox x:Name="DeseaseCombo"  >
+                <hc:CheckComboBox.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
-                </hc:ComboBox.Effect>
-            </hc:ComboBox>
+                </hc:CheckComboBox.Effect>
+                </hc:CheckComboBox>-->
+            <xctk:CheckComboBox x:Name="DeseaseCombo" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center" 
+                     DisplayMemberPath="Color"
+                                Width="150" Foreground="Black"
+                     />
+
         </StackPanel>
+        
 
         <StackPanel x:Name="DescriptionStack" Grid.Row="3" Grid.Column="1" Margin="10,0,10,10">
             <TextBlock Text="Description*" Foreground="White" />
             <TextBox Height="30" x:Name="DescriptionTextBox"/>
+
+            
         </StackPanel>
+        <StackPanel x:Name="VitaStack" Grid.Row="3" Grid.Column="2" Margin="10,0,10,10">
+            <TextBlock Text="Vitamins"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="VitaTextBox"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Grid.RowSpan="3" Margin="5" >
+            <TextBlock Text="Nozzle"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="NozzleTextBox"/>
+            <TextBlock Text="Anesthesia"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="AnestTextBox"/>
+            <TextBlock Text="Crown"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="CrownTextBox"/>
+            <TextBlock Text="Gel"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="GelTextBox"/>
+            
+            
+            
+
+        </StackPanel>
+      
 
 
         <Grid Grid.Row="4" Grid.Column="3">

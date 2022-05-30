@@ -91,7 +91,7 @@ namespace DentalClinic.Pages
             
             Properties.Settings.Default.patientFirst = item.patient_id;
             Console.WriteLine(Properties.Settings.Default.patientFirst);
-
+            Properties.Settings.Default.Save();
             this.NavigationService.Navigate(new ConclusionPage());
         }
     }

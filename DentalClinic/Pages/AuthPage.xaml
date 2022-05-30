@@ -24,7 +24,7 @@
                     <ColumnDefinition Width="21*"/>
                     <ColumnDefinition Width="180*"/>
                 </Grid.ColumnDefinitions>
-                <CheckBox Height="16" />
+                <CheckBox Height="16" IsChecked="True"/>
                 <TextBlock Margin="10,0,0,0" Grid.Column="1" Text="Remember me" FontFamily="{StaticResource LexendDeca}" Foreground="#FFF2F2F2" VerticalAlignment="Bottom"/>
             </Grid>
             <Button IsDefault="True" x:Name="LoginButton" Click="LoginButton_Click" Content="Login" Background="#FF4E97FC" BorderBrush="{x:Null}" Width="200" Height="30" Margin="0,14,0,0">

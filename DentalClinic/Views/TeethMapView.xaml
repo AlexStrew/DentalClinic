@@ -6,152 +6,59 @@
         xmlns:local="clr-namespace:DentalClinic.Views"
         mc:Ignorable="d"
         Title="TeethMapView" Height="450" Width="800">
+
     <Grid>
+       
         
-        <StackPanel VerticalAlignment="Center">
-            <TextBlock  FontFamily="{StaticResource LexendDeca}" Text="Teeth map"  VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="36" Foreground="Black" />
-            <TextBlock  FontFamily="{StaticResource LexendDeca}" Text="Upper" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26" Foreground="Black" />
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,50" >
-                <StackPanel Margin="5">
-                    <TextBlock Text="1"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="2"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="3"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="4"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="5"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="6"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="7"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="8"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="9"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="10"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="11"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="12"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="13"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="14"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="15"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="16"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-            </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
             
-            <TextBlock  FontFamily="{StaticResource LexendDeca}" Text="Lower"  HorizontalAlignment="Center" FontSize="26" Foreground="Black" />
+        </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,50,0,0">
-                <StackPanel Margin="5">
-                    <TextBlock Text="1"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="2"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="3"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="4"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="5"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="6"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="7"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="8"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="9"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="10"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="11"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="12"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="13"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="14"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="15"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <TextBlock Text="16"/>
-                    <CheckBox IsChecked="True"/>
-                </StackPanel>
-            </StackPanel>
-            <Button Content="Save + Close" x:Name="SaveMapButton" Click="SaveMapButton_Click" Width="100" Height="35" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White" Margin="40,10,0,0">
-                <Button.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
-                </Button.Effect>
-            </Button>
-        </StackPanel>
+        <ListBox Name="ListBoxOptions">
+            <CheckBox Content="1"></CheckBox>
+            <CheckBox Content="2"></CheckBox>
+            <CheckBox Content="3"></CheckBox>
+            <CheckBox Content="4"></CheckBox>
+            <CheckBox Content="5"></CheckBox>
+            <CheckBox Content="6"></CheckBox>
+            <CheckBox Content="7"></CheckBox>
+            <CheckBox Content="8"></CheckBox>
+            <CheckBox Content="9"></CheckBox>
+            <CheckBox Content="10"></CheckBox>
+            <CheckBox Content="11"></CheckBox>
+            <CheckBox Content="12"></CheckBox>
+            <CheckBox Content="13"></CheckBox>
+            <CheckBox Content="14"></CheckBox>
+            <CheckBox Content="15"></CheckBox>
+            <CheckBox Content="16"></CheckBox>
+            <CheckBox Content="17"></CheckBox>
+            <CheckBox Content="18"></CheckBox>
+            <CheckBox Content="19"></CheckBox>
+            <CheckBox Content="20"></CheckBox>
+            <CheckBox Content="21"></CheckBox>
+            <CheckBox Content="22"></CheckBox>
+            <CheckBox Content="23"></CheckBox>
+            <CheckBox Content="24"></CheckBox>
+            <CheckBox Content="25"></CheckBox>
+            <CheckBox Content="26"></CheckBox>
+            <CheckBox Content="27"></CheckBox>
+            <CheckBox Content="28"></CheckBox>
+            <CheckBox Content="29"></CheckBox>
+            <CheckBox Content="30"></CheckBox>
+            <CheckBox Content="31"></CheckBox>
+            <CheckBox Content="32"></CheckBox>
+
+
+        </ListBox>
+        <Button Grid.Row="1"
+                
+                Margin="5"
+                Name="ButtonShowResults"
+                Content="Save"
+                Click="ButtonShowResults_Click"
+                ></Button>
     </Grid>
+
 </Window>

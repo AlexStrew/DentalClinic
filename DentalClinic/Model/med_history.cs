@@ -25,7 +25,9 @@ namespace DentalClinic.Model
         public string complication { get; set; }
         public string stage { get; set; }
         public string mkb { get; set; }
+        public Nullable<int> consumable_id { get; set; }
     
+        public virtual consumables consumables { get; set; }
         public virtual patients patients { get; set; }
     }
 }

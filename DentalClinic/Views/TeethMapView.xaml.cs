@@ -24,12 +24,18 @@ namespace DentalClinic.Views
             InitializeComponent();
         }
 
-        private void SaveMapButton_Click(object sender, RoutedEventArgs e)
-        {
 
+        private void ButtonShowResults_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItems = ListBoxOptions.Items.Cast<CheckBox>().Where(x => x.IsChecked == true).Select(x => x.Content).ToList();
+
+            string str = string.Join(",", selectedItems);
+            Properties.Settings.Default.teethMapArray = str;
+            Properties.Settings.Default.Save();
+            MessageBox.Show(string.Join(",", selectedItems));
+            
             DialogResult = true;
             this.Close();
-
         }
     }
 }

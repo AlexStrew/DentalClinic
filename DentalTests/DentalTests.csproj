@@ -64,6 +64,9 @@
     <Compile Include="Modelka\appointment.cs">
       <DependentUpon>ModelTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="Modelka\consumables.cs">
+      <DependentUpon>ModelTest.tt</DependentUpon>
+    </Compile>
     <Compile Include="Modelka\CoreTest.cs" />
     <Compile Include="Modelka\login.cs">
       <DependentUpon>ModelTest.tt</DependentUpon>
@@ -90,9 +93,6 @@
       <DependentUpon>ModelTest.edmx</DependentUpon>
     </Compile>
     <Compile Include="Modelka\patients.cs">
-      <DependentUpon>ModelTest.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Modelka\sysdiagrams.cs">
       <DependentUpon>ModelTest.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

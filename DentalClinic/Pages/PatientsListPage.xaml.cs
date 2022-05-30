@@ -47,6 +47,9 @@ namespace DentalClinic.Pages
             }
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(PatientListView.ItemsSource);
             view.Filter = UserFilter;
+
+            CollectionView viewDate = (CollectionView)CollectionViewSource.GetDefaultView(PatientListView.ItemsSource);
+            viewDate.Filter = UserFilterByDate;
             UpdateUI();
         }
 
@@ -56,6 +59,14 @@ namespace DentalClinic.Pages
                 return true;
             else
                 return ((item as patients).patient_last_name.IndexOf(SearchTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        private bool UserFilterByDate(object item)
+        {
+            if (String.IsNullOrEmpty(SearchByDate.SelectedDate.ToString()))
+                return true;
+            else
+                return ((item as appointment).date_app.ToString().IndexOf(SearchByDate.SelectedDate.ToString(), StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
         private void DescriptionTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -158,6 +169,13 @@ namespace DentalClinic.Pages
                 }
                 PatientListView.ItemsSource = db.context.patients.ToList();
             }
+        }
+
+        private void RefreshByDateButton_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(PatientListView.ItemsSource).Refresh();
+
+
         }
     }
 }

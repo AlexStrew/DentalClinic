@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ArmDentalModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ArmDentalModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="appointment">
           <Key>
             <PropertyRef Name="id_appointment" />
@@ -14,6 +14,18 @@
           <Property Name="date_app" Type="datetime" />
           <Property Name="reason" Type="nvarchar" MaxLength="50" />
           <Property Name="description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="consumables">
+          <Key>
+            <PropertyRef Name="id_consumable" />
+          </Key>
+          <Property Name="id_consumable" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nozzle" Type="int" />
+          <Property Name="anesthesia" Type="int" />
+          <Property Name="crown" Type="int" />
+          <Property Name="gel" Type="int" />
+          <Property Name="vitamins" Type="int" />
+          <Property Name="basic_tools" Type="int" />
         </EntityType>
         <EntityType Name="login">
           <Key>
@@ -38,6 +50,7 @@
           <Property Name="complication" Type="nvarchar" MaxLength="50" />
           <Property Name="stage" Type="nvarchar" MaxLength="50" />
           <Property Name="mkb" Type="nvarchar" MaxLength="250" />
+          <Property Name="consumable_id" Type="int" />
         </EntityType>
         <EntityType Name="mkb_codes">
           <Key>
@@ -56,16 +69,8 @@
           <Property Name="patient_first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="patient_last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="date_of_birth" Type="date" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="allergy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="teeth_map" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_appointment_patients">
           <End Role="patients" Type="Self.patients" Multiplicity="1">
@@ -78,6 +83,20 @@
             </Principal>
             <Dependent Role="appointment">
               <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_med_history_consumables">
+          <End Role="consumables" Type="Self.consumables" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="med_history" Type="Self.med_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="consumables">
+              <PropertyRef Name="id_consumable" />
+            </Principal>
+            <Dependent Role="med_history">
+              <PropertyRef Name="consumable_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -97,25 +116,48 @@
         </Association>
         <EntityContainer Name="Хранилище ArmDentalModelContainer">
           <EntitySet Name="appointment" EntityType="Self.appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="consumables" EntityType="Self.consumables" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="med_history" EntityType="Self.med_history" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mkb_codes" EntityType="Self.mkb_codes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="patients" EntityType="Self.patients" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_appointment_patients" Association="Self.FK_appointment_patients">
             <End Role="patients" EntitySet="patients" />
             <End Role="appointment" EntitySet="appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_med_history_consumables" Association="Self.FK_med_history_consumables">
+            <End Role="consumables" EntitySet="consumables" />
+            <End Role="med_history" EntitySet="med_history" />
           </AssociationSet>
           <AssociationSet Name="FK_med_history_patients" Association="Self.FK_med_history_patients">
             <End Role="patients" EntitySet="patients" />
             <End Role="med_history" EntitySet="med_history" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ArmDentalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ArmDentalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="appointment" EntityType="ArmDentalModel.appointment" />
+          <EntitySet Name="consumables" EntityType="ArmDentalModel.consumables" />
+          <EntitySet Name="login" EntityType="ArmDentalModel.login" />
+          <EntitySet Name="med_history" EntityType="ArmDentalModel.med_history" />
+          <EntitySet Name="mkb_codes" EntityType="ArmDentalModel.mkb_codes" />
+          <EntitySet Name="patients" EntityType="ArmDentalModel.patients" />
+          <AssociationSet Name="FK_appointment_patients" Association="ArmDentalModel.FK_appointment_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="appointment" EntitySet="appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_med_history_consumables" Association="ArmDentalModel.FK_med_history_consumables">
+            <End Role="consumables" EntitySet="consumables" />
+            <End Role="med_history" EntitySet="med_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_med_history_patients" Association="ArmDentalModel.FK_med_history_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="med_history" EntitySet="med_history" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="appointment">
           <Key>
             <PropertyRef Name="id_appointment" />
@@ -125,15 +167,28 @@
           <Property Name="date_app" Type="DateTime" Precision="3" />
           <Property Name="reason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="patients" Relationship="Self.FK_appointment_patients" FromRole="appointment" ToRole="patients" />
+          <NavigationProperty Name="patients" Relationship="ArmDentalModel.FK_appointment_patients" FromRole="appointment" ToRole="patients" />
+        </EntityType>
+        <EntityType Name="consumables">
+          <Key>
+            <PropertyRef Name="id_consumable" />
+          </Key>
+          <Property Name="id_consumable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nozzle" Type="Int32" />
+          <Property Name="anesthesia" Type="Int32" />
+          <Property Name="crown" Type="Int32" />
+          <Property Name="gel" Type="Int32" />
+          <Property Name="vitamins" Type="Int32" />
+          <Property Name="basic_tools" Type="Int32" />
+          <NavigationProperty Name="med_history" Relationship="ArmDentalModel.FK_med_history_consumables" FromRole="consumables" ToRole="med_history" />
         </EntityType>
         <EntityType Name="login">
           <Key>
             <PropertyRef Name="id_login" />
           </Key>
           <Property Name="id_login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="login1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="login1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="med_history">
           <Key>
@@ -150,7 +205,9 @@
           <Property Name="complication" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="stage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="mkb" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="patients" Relationship="Self.FK_med_history_patients" FromRole="med_history" ToRole="patients" />
+          <Property Name="consumable_id" Type="Int32" />
+          <NavigationProperty Name="consumables" Relationship="ArmDentalModel.FK_med_history_consumables" FromRole="med_history" ToRole="consumables" />
+          <NavigationProperty Name="patients" Relationship="ArmDentalModel.FK_med_history_patients" FromRole="med_history" ToRole="patients" />
         </EntityType>
         <EntityType Name="mkb_codes">
           <Key>
@@ -166,27 +223,19 @@
             <PropertyRef Name="id_patient" />
           </Key>
           <Property Name="id_patient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="patient_first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="patient_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patient_first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="patient_last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="appointment" Relationship="Self.FK_appointment_patients" FromRole="patients" ToRole="appointment" />
-          <NavigationProperty Name="med_history" Relationship="Self.FK_med_history_patients" FromRole="patients" ToRole="med_history" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="allergy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="teeth_map" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="appointment" Relationship="ArmDentalModel.FK_appointment_patients" FromRole="patients" ToRole="appointment" />
+          <NavigationProperty Name="med_history" Relationship="ArmDentalModel.FK_med_history_patients" FromRole="patients" ToRole="med_history" />
         </EntityType>
         <Association Name="FK_appointment_patients">
-          <End Role="patients" Type="Self.patients" Multiplicity="1">
+          <End Type="ArmDentalModel.patients" Role="patients" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="appointment" Type="Self.appointment" Multiplicity="*" />
+          <End Type="ArmDentalModel.appointment" Role="appointment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="patients">
               <PropertyRef Name="id_patient" />
@@ -196,11 +245,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_med_history_patients">
-          <End Role="patients" Type="Self.patients" Multiplicity="1">
+        <Association Name="FK_med_history_consumables">
+          <End Type="ArmDentalModel.consumables" Role="consumables" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="med_history" Type="Self.med_history" Multiplicity="*" />
+          <End Type="ArmDentalModel.med_history" Role="med_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="consumables">
+              <PropertyRef Name="id_consumable" />
+            </Principal>
+            <Dependent Role="med_history">
+              <PropertyRef Name="consumable_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_med_history_patients">
+          <End Type="ArmDentalModel.patients" Role="patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ArmDentalModel.med_history" Role="med_history" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="patients">
               <PropertyRef Name="id_patient" />
@@ -210,22 +273,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ArmDentalEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="appointment" EntityType="Self.appointment" />
-          <EntitySet Name="login" EntityType="Self.login" />
-          <EntitySet Name="med_history" EntityType="Self.med_history" />
-          <EntitySet Name="mkb_codes" EntityType="Self.mkb_codes" />
-          <EntitySet Name="patients" EntityType="Self.patients" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK_appointment_patients" Association="Self.FK_appointment_patients">
-            <End Role="patients" EntitySet="patients" />
-            <End Role="appointment" EntitySet="appointment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_med_history_patients" Association="Self.FK_med_history_patients">
-            <End Role="patients" EntitySet="patients" />
-            <End Role="med_history" EntitySet="med_history" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -235,68 +282,73 @@
           <EntitySetMapping Name="appointment">
             <EntityTypeMapping TypeName="ArmDentalModel.appointment">
               <MappingFragment StoreEntitySet="appointment">
-                <ScalarProperty Name="id_appointment" ColumnName="id_appointment" />
-                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
-                <ScalarProperty Name="date_app" ColumnName="date_app" />
-                <ScalarProperty Name="reason" ColumnName="reason" />
                 <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="date_app" ColumnName="date_app" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="id_appointment" ColumnName="id_appointment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="consumables">
+            <EntityTypeMapping TypeName="ArmDentalModel.consumables">
+              <MappingFragment StoreEntitySet="consumables">
+                <ScalarProperty Name="basic_tools" ColumnName="basic_tools" />
+                <ScalarProperty Name="vitamins" ColumnName="vitamins" />
+                <ScalarProperty Name="gel" ColumnName="gel" />
+                <ScalarProperty Name="crown" ColumnName="crown" />
+                <ScalarProperty Name="anesthesia" ColumnName="anesthesia" />
+                <ScalarProperty Name="nozzle" ColumnName="nozzle" />
+                <ScalarProperty Name="id_consumable" ColumnName="id_consumable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="login">
             <EntityTypeMapping TypeName="ArmDentalModel.login">
               <MappingFragment StoreEntitySet="login">
-                <ScalarProperty Name="id_login" ColumnName="id_login" />
-                <ScalarProperty Name="login1" ColumnName="login" />
                 <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login1" ColumnName="login" />
+                <ScalarProperty Name="id_login" ColumnName="id_login" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="med_history">
             <EntityTypeMapping TypeName="ArmDentalModel.med_history">
               <MappingFragment StoreEntitySet="med_history">
-                <ScalarProperty Name="id_history" ColumnName="id_history" />
-                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
-                <ScalarProperty Name="x_ray" ColumnName="x_ray" />
-                <ScalarProperty Name="fase" ColumnName="fase" />
-                <ScalarProperty Name="desease" ColumnName="desease" />
-                <ScalarProperty Name="current_health" ColumnName="current_health" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="cost" ColumnName="cost" />
-                <ScalarProperty Name="complication" ColumnName="complication" />
-                <ScalarProperty Name="stage" ColumnName="stage" />
+                <ScalarProperty Name="consumable_id" ColumnName="consumable_id" />
                 <ScalarProperty Name="mkb" ColumnName="mkb" />
+                <ScalarProperty Name="stage" ColumnName="stage" />
+                <ScalarProperty Name="complication" ColumnName="complication" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="current_health" ColumnName="current_health" />
+                <ScalarProperty Name="desease" ColumnName="desease" />
+                <ScalarProperty Name="fase" ColumnName="fase" />
+                <ScalarProperty Name="x_ray" ColumnName="x_ray" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="id_history" ColumnName="id_history" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="mkb_codes">
             <EntityTypeMapping TypeName="ArmDentalModel.mkb_codes">
               <MappingFragment StoreEntitySet="mkb_codes">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="patients">
             <EntityTypeMapping TypeName="ArmDentalModel.patients">
               <MappingFragment StoreEntitySet="patients">
-                <ScalarProperty Name="id_patient" ColumnName="id_patient" />
-                <ScalarProperty Name="patient_first_name" ColumnName="patient_first_name" />
-                <ScalarProperty Name="patient_last_name" ColumnName="patient_last_name" />
+                <ScalarProperty Name="teeth_map" ColumnName="teeth_map" />
+                <ScalarProperty Name="allergy" ColumnName="allergy" />
                 <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ArmDentalModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="patient_last_name" ColumnName="patient_last_name" />
+                <ScalarProperty Name="patient_first_name" ColumnName="patient_first_name" />
+                <ScalarProperty Name="id_patient" ColumnName="id_patient" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
