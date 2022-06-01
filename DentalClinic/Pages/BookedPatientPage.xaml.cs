@@ -38,7 +38,7 @@ namespace DentalClinic.Pages
 
         private void PatientListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            //test
         }
 
         private void EnrollButton_Click(object sender, RoutedEventArgs e)
