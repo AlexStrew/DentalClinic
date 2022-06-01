@@ -19,12 +19,15 @@ namespace DentalClinic.Model
         public string x_ray { get; set; }
         public string fase { get; set; }
         public string desease { get; set; }
-        public string medication_prior { get; set; }
-        public string prescription { get; set; }
-        public int dentist_id { get; set; }
         public string current_health { get; set; }
+        public string description { get; set; }
+        public Nullable<int> cost { get; set; }
+        public string complication { get; set; }
+        public string stage { get; set; }
+        public string mkb { get; set; }
+        public Nullable<int> consumable_id { get; set; }
     
-        public virtual denstist denstist { get; set; }
+        public virtual consumables consumables { get; set; }
         public virtual patients patients { get; set; }
     }
 }

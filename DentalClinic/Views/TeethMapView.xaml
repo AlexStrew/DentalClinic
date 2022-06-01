@@ -1,0 +1,64 @@
+﻿<Window x:Class="DentalClinic.Views.TeethMapView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DentalClinic.Views"
+        mc:Ignorable="d"
+        Title="TeethMapView" Height="450" Width="800">
+
+    <Grid>
+       
+        
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            
+        </Grid.RowDefinitions>
+
+        <ListBox Name="ListBoxOptions">
+            <CheckBox Content="1"></CheckBox>
+            <CheckBox Content="2"></CheckBox>
+            <CheckBox Content="3"></CheckBox>
+            <CheckBox Content="4"></CheckBox>
+            <CheckBox Content="5"></CheckBox>
+            <CheckBox Content="6"></CheckBox>
+            <CheckBox Content="7"></CheckBox>
+            <CheckBox Content="8"></CheckBox>
+            <CheckBox Content="9"></CheckBox>
+            <CheckBox Content="10"></CheckBox>
+            <CheckBox Content="11"></CheckBox>
+            <CheckBox Content="12"></CheckBox>
+            <CheckBox Content="13"></CheckBox>
+            <CheckBox Content="14"></CheckBox>
+            <CheckBox Content="15"></CheckBox>
+            <CheckBox Content="16"></CheckBox>
+            <CheckBox Content="17"></CheckBox>
+            <CheckBox Content="18"></CheckBox>
+            <CheckBox Content="19"></CheckBox>
+            <CheckBox Content="20"></CheckBox>
+            <CheckBox Content="21"></CheckBox>
+            <CheckBox Content="22"></CheckBox>
+            <CheckBox Content="23"></CheckBox>
+            <CheckBox Content="24"></CheckBox>
+            <CheckBox Content="25"></CheckBox>
+            <CheckBox Content="26"></CheckBox>
+            <CheckBox Content="27"></CheckBox>
+            <CheckBox Content="28"></CheckBox>
+            <CheckBox Content="29"></CheckBox>
+            <CheckBox Content="30"></CheckBox>
+            <CheckBox Content="31"></CheckBox>
+            <CheckBox Content="32"></CheckBox>
+
+
+        </ListBox>
+        <Button Grid.Row="1"
+                
+                Margin="5"
+                Name="ButtonShowResults"
+                Content="Save"
+                Click="ButtonShowResults_Click"
+                ></Button>
+    </Grid>
+
+</Window>

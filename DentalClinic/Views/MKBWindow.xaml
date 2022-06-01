@@ -1,0 +1,31 @@
+﻿<Window x:Class="DentalClinic.Views.MKBWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DentalClinic.Views"
+        mc:Ignorable="d"
+        Title="MKBWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TreeView x:Name="RegionTreeView" ItemsSource="{Binding TreeNodeList}"
+                  MinHeight="300" MinWidth="400"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  SelectedItemChanged="RegionTreeView_SelectedItemChanged" Grid.ColumnSpan="2">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Nodes}">
+                    <TextBlock Text="{Binding Description}"/>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <Button Click="AddButton_Click" Grid.Row="1" Content="Choose" x:Name="AddButton" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White"/>
+    </Grid>
+</Window>

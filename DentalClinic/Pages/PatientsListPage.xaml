@@ -27,13 +27,15 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             
-            <hc:TextBox x:Name="SearchTextBox" Margin="10" hc:InfoElement.Placeholder="Description"    TextWrapping="Wrap"  VerticalAlignment="Center" HorizontalAlignment="Left"  Background="#FFF2F2F2" Foreground="#FF212121" SelectionBrush="#FF4E97FC" Height="15" Width="250" VerticalContentAlignment="Top" TextChanged="SearchTextBox_TextChanged">
+            <hc:TextBox x:Name="SearchTextBox" Margin="10" hc:InfoElement.Placeholder="Search" TextWrapping="Wrap"  VerticalAlignment="Center" HorizontalAlignment="Left"  Background="#FFF2F2F2" Foreground="#FF212121" SelectionBrush="#FF4E97FC" Height="15" Width="250" VerticalContentAlignment="Top" TextChanged="SearchTextBox_TextChanged">
                 <hc:TextBox.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </hc:TextBox.Effect>
             </hc:TextBox>
+            <DatePicker x:Name="SearchByDate" Height="30" Width="150" Margin="50,0,0,0"></DatePicker>
+            <Button x:Name="RefreshByDateButton" Click="RefreshByDateButton_Click" Margin="250,0,0,0"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <ComboBox x:Name="SortComboBox"
+                <ComboBox IsEnabled="False" x:Name="SortComboBox"
                           SelectedIndex="0"
                           VerticalAlignment="Stretch"
                           VerticalContentAlignment="Center"
@@ -41,41 +43,10 @@
                           
                           Width="100"
                           Margin="10"/>
-                <Button
-                    x:Name="ReverseButton"
-                    Background="Transparent"
-                    Width="27" Height="27"
-                    Click="ReverseButton_Click">
-                    <Button.Content>
-                        <Image Source="/Resources/armico.ico"/>
-                    </Button.Content>
-                </Button>
+               
             </StackPanel>
-            <!--<StackPanel Grid.Row="1" Orientation="Horizontal" Height="50">
-                <Button  HorizontalAlignment="Left" x:Name="btnFirst" 
-        VerticalAlignment="Bottom" Width="75" Click="btnFirst_Click">First</Button>
-                <Button  HorizontalAlignment="Left" x:Name="btnPrev" 
-        VerticalAlignment="Bottom" Width="75" Click="btnPrev_Click">Previous</Button>
-                <Button  x:Name="btnNext" 
-        VerticalAlignment="Bottom" Click="btnNext_Click">Next</Button>
-                <Button  HorizontalAlignment="Right"  x:Name="btnLast" 
-        VerticalAlignment="Bottom" Width="75" Click="btnLast_Click">Last</Button>-->
-
-                <!--<TextBlock Height="21" x:Name="tbCurrentPage" 
-          VerticalAlignment="Bottom" />
-                <TextBlock Height="21" HorizontalAlignment="Right" x:Name="textBlock3" 
-          VerticalAlignment="Bottom" Width="20" Text="/"/>
-                <TextBlock Height="21" HorizontalAlignment="Right" x:Name="tbTotalPage" 
-          VerticalAlignment="Bottom" Width="28" />
-            </StackPanel>-->
-            <ComboBox x:Name="FilterComboBox" Grid.Column="2"
-                      SelectedIndex="0"
-                      SelectionChanged="FilterComboBox_SelectionChanged"
-                      DisplayMemberPath="Title"
-                      SelectedValuePath="ID"
-                      Width="100"
-                      Margin="10">
-            </ComboBox>
+        
+           
             <TextBlock Grid.Row="1" Grid.Column="2"
                        x:Name="CountRowsTextBlock"
                        HorizontalAlignment="Right"/>
@@ -83,17 +54,8 @@
         <ListView Grid.Row="1" x:Name="PatientListView" 
                   HorizontalAlignment="Stretch"
                   SelectionMode="Single"
-                  SelectionChanged="PatientListView_SelectionChanged" Height="300" >
-            <!--<ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock  Text="dfghfxgc"  Foreground="Black" />
-                </DataTemplate>
-            </ListView.ItemTemplate>-->
+                  SelectionChanged="PatientListView_SelectionChanged" Height="300">
+
 
 
             <ListView.View>
@@ -127,78 +89,26 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button
-                       Margin="0"
-                       VerticalAlignment="Center"
-                       Click="Button_Click" Background="Transparent" BorderBrush="Transparent" Height="40" Width="45">
-                                    <Image Source="/Resources/icons8-edit-60.png" Width="20" Height="20" >
-                                        <Image.Style>
-                                            <Style TargetType="{x:Type Image}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Effect">
-                                                            <Setter.Value>
-                                                                <DropShadowEffect ShadowDepth="0" Color="#535353" Opacity="2" BlurRadius="50"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button
-                       Margin="0"
-                       VerticalAlignment="Center"
-                       Click="Button_Click" Background="Transparent" BorderBrush="Transparent" Height="40" Width="45">
-                                    <Image Source="/Resources/icons8-delete-60.png" Width="20" Height="20" >
-                                        <Image.Style>
-                                            <Style TargetType="{x:Type Image}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Effect">
-                                                            <Setter.Value>
-                                                                <DropShadowEffect ShadowDepth="0" Color="#535353" Opacity="2" BlurRadius="50"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    
+                   
+                   
                     
                 </GridView>
             </ListView.View>
             
-            <!--<ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="5">
-                        <TextBlock  Text="dfghfxgc"  Foreground="Black" />
-                        --><!--<TextBlock  Text="{Binding patient_last_name}"  Foreground="Black"/>
-                        <TextBlock  Text="{Binding date_of_birth}"  Foreground="Black"/>--><!--
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>-->
+        
         </ListView>
 
       
         <Button HorizontalAlignment="Left" 
                 x:Name="AddPatientButton" 
                 Click="AddPatientButton_Click"
-                Content="Добавить пациента"
-                Grid.Row="2"/>
+                Content="Add"
+                Grid.Row="2" Margin="5" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White"/>
+        <Button HorizontalAlignment="Left" 
+                x:Name="DelPatientButton" 
+                Click="DelPatientButton_Click"
+                Content="Delete"
+                Grid.Row="2" Margin="60,0,0,0" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White"/>
     </Grid>
 </Page>

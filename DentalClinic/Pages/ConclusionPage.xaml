@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DentalClinic.Pages"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       xmlns:hc="https://handyorg.github.io/handycontrol"
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
     x:Class="DentalClinic.Pages.ConclusionPage"
@@ -15,22 +16,22 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="150"/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition />
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <TextBlock FontFamily="{StaticResource LexendDeca}" Text="Conclusion" Grid.ColumnSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" Foreground="White" />
+        <TextBlock FontFamily="{StaticResource LexendDeca}" Text="Conclusion" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" Foreground="White" Grid.Column="1" Height="44" Width="174" />
 
-        <Border BorderBrush="#535353" CornerRadius="10" BorderThickness="4" Grid.Row="1" Margin="10">
+        <Border BorderBrush="#535353" CornerRadius="10" BorderThickness="4" Grid.Row="1" Margin="10,10,10,10">
             <StackPanel x:Name="NamePatientStack"   Background="#535353">
                 <TextBlock Text="First name" FontFamily="{StaticResource LexendDeca}" Foreground="White" Margin="5,5,0,0" />
                 <hc:TextBox x:Name="FirstNameTextBox" Margin="5" Text="{Binding ElementName=FirstNameTextBox, Path=Text}"  IsEnabled="False" />
@@ -38,99 +39,141 @@
                 <hc:TextBox x:Name="LastNameTextBox" Margin="5" IsEnabled="False" Text="{Binding ElementName=FirstNameTextBox, Path=Text}"/>
             </StackPanel>
         </Border>
-        <StackPanel x:Name="MKBStack" Grid.Row="1" Grid.Column="1" Margin="5">
+        
+        
+        <StackPanel x:Name="MKBStack" Grid.Row="1" Grid.Column="1" Margin="5,5,5,5">
             <TextBlock Text="MKB*" Foreground="White" />
-            <hc:CheckComboBox>
+            <!--<hc:CheckComboBox x:Name="MKBCombo">
                 <hc:CheckComboBox.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </hc:CheckComboBox.Effect>
-                <ComboBoxItem Content="Lorem" Foreground="#FF0D0C0C" />
-                <ComboBoxItem Content="Ipsum" Foreground="#FF0A0909"/>
-                <ComboBoxItem Content="Dolor" Foreground="#FF020202" />
-            </hc:CheckComboBox>
+
+            </hc:CheckComboBox>-->
+
+            
+
+            <hc:TextBox x:Name="TestText" IsEnabled="False"/>
+            <Button Click="SelectMKB_Click" HorizontalAlignment="Right" Width="55" Grid.Column="1" Content="Select" x:Name="SelectMKB"  Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White" Margin="0,5,0,0"></Button>
         </StackPanel>
 
-        <StackPanel x:Name="FaseStack" Grid.Column="2" Grid.Row="1" Margin="5">
+        <StackPanel x:Name="FaseStack" Grid.Column="2" Grid.Row="1" Margin="5,5,5,5">
             <TextBlock Text="Fase*" Foreground="White" />
-            <hc:ComboBox>
+            <hc:ComboBox x:Name="FaseCombo">
                 <hc:ComboBox.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </hc:ComboBox.Effect>
-                <ComboBoxItem Content="Lorem"/>
-                <ComboBoxItem Content="Ipsum"/>
-                <ComboBoxItem Content="Dolor"/>
+
             </hc:ComboBox>
+            <TextBlock Text="Basic tools"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="BasicTextBox"/>
         </StackPanel>
 
-        <StackPanel x:Name="ComplicationStack" Grid.Column="3" Grid.Row="1" Margin="5">
+        <StackPanel x:Name="ComplicationStack" Grid.Column="3" Grid.Row="1" Margin="5,5,5,5">
             <TextBlock Text="Complication*" Foreground="White" />
-            <hc:ComboBox>
+            <hc:ComboBox x:Name="ComplicationCombo">
                 <hc:ComboBox.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </hc:ComboBox.Effect>
-                <ComboBoxItem Content="Lorem"/>
-                <ComboBoxItem Content="Ipsum"/>
-                <ComboBoxItem Content="Dolor"/>
+
             </hc:ComboBox>
         </StackPanel>
 
-        <StackPanel x:Name="StageStack" Grid.Column="2" Grid.Row="2" Margin="10">
+        <StackPanel x:Name="StageStack" Grid.Column="2" Grid.Row="2" Margin="10,10,10,10">
             <TextBlock Text="Stage*" Foreground="White" />
-            <hc:ComboBox>
+            <hc:ComboBox x:Name="StageCombo">
                 <hc:ComboBox.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </hc:ComboBox.Effect>
-                <ComboBoxItem Content="Lorem"/>
-                <ComboBoxItem Content="Ipsum"/>
-                <ComboBoxItem Content="Dolor"/>
+
+            </hc:ComboBox>
+
+            <TextBlock Text="Health*" Foreground="White" />
+            <hc:ComboBox x:Name="HealthCombo">
+                <hc:ComboBox.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </hc:ComboBox.Effect>
+
             </hc:ComboBox>
         </StackPanel>
 
-        <StackPanel x:Name="OtherSelectorStack" Grid.Column="4" Grid.Row="2" Margin="5" VerticalAlignment="Center">
+        <StackPanel x:Name="XRayStack" Grid.Column="3" Grid.Row="2" Margin="10,10,10,10">
+            <TextBlock Text="X-ray*" Foreground="White" />
+            <hc:ComboBox x:Name="xRayCombo">
+                <hc:ComboBox.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </hc:ComboBox.Effect>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <CheckBox Margin="5"
-                Grid.Column="0" Foreground="White" FontSize="16"/>
-                    <CheckBox x:Name="toggleSwitch2" Margin="5"
-               Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="16"/>
-                    <TextBlock Text="Ultrasonic" Foreground="White" Grid.Column="1"/>
-                <TextBlock Text="X-ray" Foreground="White" Grid.Column="1" Grid.Row="1"/>
-            </Grid>
+            </hc:ComboBox>
         </StackPanel>
-        <TextBox Text="{Binding YourSourceProperty,StringFormat=f2}" x:Name="currencyTextBox" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="3" TextAlignment="Right"/>
+
+        <StackPanel x:Name="PriceStack" Grid.Column="3" Grid.Row="3" Margin="10,0,10,10">
+            <TextBlock Text="Total *" Foreground="White" />
+            <TextBox Text="{Binding YourSourceProperty,StringFormat=f2}" x:Name="currencyTextBox"  TextAlignment="Right"/>
+        </StackPanel>
 
 
-        <StackPanel x:Name="TypeServiceStack" Grid.Row="2" Grid.Column="1" Margin="10">
+        <StackPanel x:Name="TypeServiceStack" Grid.Row="2" Grid.Column="1" Margin="10,10,10,10">
             <TextBlock Text="Service*" Foreground="White" />
-            <hc:ComboBox>
+            <hc:ComboBox x:Name="ServiceCombo"  >
                 <hc:ComboBox.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </hc:ComboBox.Effect>
-                <ComboBoxItem Content="Lorem"/>
-                <ComboBoxItem Content="Ipsum"/>
-                <ComboBoxItem Content="Dolor"/>
             </hc:ComboBox>
+            <TextBlock Text="Desease*" Foreground="White" />
+            <!--<hc:CheckComboBox x:Name="DeseaseCombo"  >
+                <hc:CheckComboBox.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </hc:CheckComboBox.Effect>
+                </hc:CheckComboBox>-->
+            <xctk:CheckComboBox x:Name="DeseaseCombo" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center" 
+                     DisplayMemberPath="Color"
+                                Width="150" Foreground="Black"
+                     />
+
         </StackPanel>
+        
+
+        <StackPanel x:Name="DescriptionStack" Grid.Row="3" Grid.Column="1" Margin="10,0,10,10">
+            <TextBlock Text="Description*" Foreground="White" />
+            <TextBox Height="30" x:Name="DescriptionTextBox"/>
+
+            
+        </StackPanel>
+        <StackPanel x:Name="VitaStack" Grid.Row="3" Grid.Column="2" Margin="10,0,10,10">
+            <TextBlock Text="Vitamins"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="VitaTextBox"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Grid.RowSpan="3" Margin="5" >
+            <TextBlock Text="Nozzle"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="NozzleTextBox"/>
+            <TextBlock Text="Anesthesia"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="AnestTextBox"/>
+            <TextBlock Text="Crown"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="CrownTextBox"/>
+            <TextBlock Text="Gel"  Foreground="White"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Count" x:Name="GelTextBox"/>
+            
+            
+            
+
+        </StackPanel>
+      
+
 
         <Grid Grid.Row="4" Grid.Column="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="Sample" Grid.Column="0" Width="80" Height="30" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White">
+            <Button Content="Sample" Grid.Column="0" Width="80" Height="30" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White" IsEnabled="False">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </Button.Effect>
             </Button>
-            <Button Content="Enroll" Grid.Column="1" Width="80" Height="30" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White">
+            <Button Click="ConclusionSaveButton_Click" Content="Done" x:Name="ConclusionSaveButton" Grid.Column="1" Width="80" Height="30" Background="#FF4E97FC" BorderBrush="Transparent" Foreground="White">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </Button.Effect>

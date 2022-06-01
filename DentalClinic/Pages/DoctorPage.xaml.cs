@@ -27,7 +27,7 @@ namespace DentalClinic.Pages
 
         private void DiaryButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new DiaryPage());
+            this.NavigationService.Navigate(new BookedPatientPage());
         }
 
         private void PatientListButton_Click(object sender, RoutedEventArgs e)

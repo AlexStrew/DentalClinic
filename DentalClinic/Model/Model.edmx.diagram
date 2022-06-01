@@ -5,15 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1b70ef6ff6b540728e404834bb2c6af0" Name="Diagram1">
-        <EntityTypeShape EntityType="ArmDentalModel.appointment" Width="1.5" PointX="3" PointY="8.875" />
-        <EntityTypeShape EntityType="ArmDentalModel.denstist" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ArmDentalModel.login" Width="1.5" PointX="1.5" PointY="12.5" />
-        <EntityTypeShape EntityType="ArmDentalModel.med_history" Width="1.5" PointX="3" PointY="4.375" />
-        <EntityTypeShape EntityType="ArmDentalModel.mkb_codes" Width="1.5" PointX="5.75" PointY="2.625" />
-        <EntityTypeShape EntityType="ArmDentalModel.patients" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="ArmDentalModel.appointment" Width="1.5" PointX="3" PointY="9.375" />
+        <EntityTypeShape EntityType="ArmDentalModel.consumables" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ArmDentalModel.login" Width="1.5" PointX="5.75" PointY="2.25" />
+        <EntityTypeShape EntityType="ArmDentalModel.med_history" Width="1.5" PointX="3" PointY="4.125" />
+        <EntityTypeShape EntityType="ArmDentalModel.mkb_codes" Width="1.5" PointX="5.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ArmDentalModel.patients" Width="1.5" PointX="0.75" PointY="4.75" />
         <AssociationConnector Association="ArmDentalModel.FK_appointment_patients" />
-        <AssociationConnector Association="ArmDentalModel.FK_denstist_login" />
-        <AssociationConnector Association="ArmDentalModel.FK_med_history_denstist" />
+        <AssociationConnector Association="ArmDentalModel.FK_med_history_consumables" />
         <AssociationConnector Association="ArmDentalModel.FK_med_history_patients" />
       </Diagram>
     </edmx:Diagrams>

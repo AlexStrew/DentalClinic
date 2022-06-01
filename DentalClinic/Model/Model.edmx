@@ -11,18 +11,21 @@
           </Key>
           <Property Name="id_appointment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="patient_id" Type="int" Nullable="false" />
-          <Property Name="date_app" Type="datetime" Nullable="false" />
-          <Property Name="reason" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_app" Type="datetime" />
+          <Property Name="reason" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="250" />
         </EntityType>
-        <EntityType Name="denstist">
+        <EntityType Name="consumables">
           <Key>
-            <PropertyRef Name="id_denstist" />
+            <PropertyRef Name="id_consumable" />
           </Key>
-          <Property Name="id_denstist" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="denstist_first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="denstist_last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="speciality" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="login_id" Type="int" Nullable="false" />
+          <Property Name="id_consumable" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nozzle" Type="int" />
+          <Property Name="anesthesia" Type="int" />
+          <Property Name="crown" Type="int" />
+          <Property Name="gel" Type="int" />
+          <Property Name="vitamins" Type="int" />
+          <Property Name="basic_tools" Type="int" />
         </EntityType>
         <EntityType Name="login">
           <Key>
@@ -41,10 +44,13 @@
           <Property Name="x_ray" Type="nvarchar" MaxLength="50" />
           <Property Name="fase" Type="nvarchar" MaxLength="100" />
           <Property Name="desease" Type="nvarchar" MaxLength="50" />
-          <Property Name="medication_prior" Type="nvarchar" MaxLength="100" />
-          <Property Name="prescription" Type="nvarchar" MaxLength="50" />
-          <Property Name="dentist_id" Type="int" Nullable="false" />
           <Property Name="current_health" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="150" />
+          <Property Name="cost" Type="int" />
+          <Property Name="complication" Type="nvarchar" MaxLength="50" />
+          <Property Name="stage" Type="nvarchar" MaxLength="50" />
+          <Property Name="mkb" Type="nvarchar" MaxLength="250" />
+          <Property Name="consumable_id" Type="int" />
         </EntityType>
         <EntityType Name="mkb_codes">
           <Key>
@@ -63,6 +69,8 @@
           <Property Name="patient_first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="patient_last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="date_of_birth" Type="date" Nullable="false" />
+          <Property Name="allergy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="teeth_map" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_appointment_patients">
           <End Role="patients" Type="Self.patients" Multiplicity="1">
@@ -78,31 +86,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_denstist_login">
-          <End Role="login" Type="Self.login" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="denstist" Type="Self.denstist" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="login">
-              <PropertyRef Name="id_login" />
-            </Principal>
-            <Dependent Role="denstist">
-              <PropertyRef Name="login_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_med_history_denstist">
-          <End Role="denstist" Type="Self.denstist" Multiplicity="1">
+        <Association Name="FK_med_history_consumables">
+          <End Role="consumables" Type="Self.consumables" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="med_history" Type="Self.med_history" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="denstist">
-              <PropertyRef Name="id_denstist" />
+            <Principal Role="consumables">
+              <PropertyRef Name="id_consumable" />
             </Principal>
             <Dependent Role="med_history">
-              <PropertyRef Name="dentist_id" />
+              <PropertyRef Name="consumable_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -122,7 +116,7 @@
         </Association>
         <EntityContainer Name="Хранилище ArmDentalModelContainer">
           <EntitySet Name="appointment" EntityType="Self.appointment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="denstist" EntityType="Self.denstist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="consumables" EntityType="Self.consumables" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="med_history" EntityType="Self.med_history" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mkb_codes" EntityType="Self.mkb_codes" Schema="dbo" store:Type="Tables" />
@@ -131,12 +125,8 @@
             <End Role="patients" EntitySet="patients" />
             <End Role="appointment" EntitySet="appointment" />
           </AssociationSet>
-          <AssociationSet Name="FK_denstist_login" Association="Self.FK_denstist_login">
-            <End Role="login" EntitySet="login" />
-            <End Role="denstist" EntitySet="denstist" />
-          </AssociationSet>
-          <AssociationSet Name="FK_med_history_denstist" Association="Self.FK_med_history_denstist">
-            <End Role="denstist" EntitySet="denstist" />
+          <AssociationSet Name="FK_med_history_consumables" Association="Self.FK_med_history_consumables">
+            <End Role="consumables" EntitySet="consumables" />
             <End Role="med_history" EntitySet="med_history" />
           </AssociationSet>
           <AssociationSet Name="FK_med_history_patients" Association="Self.FK_med_history_patients">
@@ -150,7 +140,7 @@
       <Schema Namespace="ArmDentalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ArmDentalEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="appointment" EntityType="ArmDentalModel.appointment" />
-          <EntitySet Name="denstist" EntityType="ArmDentalModel.denstist" />
+          <EntitySet Name="consumables" EntityType="ArmDentalModel.consumables" />
           <EntitySet Name="login" EntityType="ArmDentalModel.login" />
           <EntitySet Name="med_history" EntityType="ArmDentalModel.med_history" />
           <EntitySet Name="mkb_codes" EntityType="ArmDentalModel.mkb_codes" />
@@ -159,12 +149,8 @@
             <End Role="patients" EntitySet="patients" />
             <End Role="appointment" EntitySet="appointment" />
           </AssociationSet>
-          <AssociationSet Name="FK_denstist_login" Association="ArmDentalModel.FK_denstist_login">
-            <End Role="login" EntitySet="login" />
-            <End Role="denstist" EntitySet="denstist" />
-          </AssociationSet>
-          <AssociationSet Name="FK_med_history_denstist" Association="ArmDentalModel.FK_med_history_denstist">
-            <End Role="denstist" EntitySet="denstist" />
+          <AssociationSet Name="FK_med_history_consumables" Association="ArmDentalModel.FK_med_history_consumables">
+            <End Role="consumables" EntitySet="consumables" />
             <End Role="med_history" EntitySet="med_history" />
           </AssociationSet>
           <AssociationSet Name="FK_med_history_patients" Association="ArmDentalModel.FK_med_history_patients">
@@ -178,21 +164,23 @@
           </Key>
           <Property Name="id_appointment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="patient_id" Type="Int32" Nullable="false" />
-          <Property Name="date_app" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="reason" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date_app" Type="DateTime" Precision="3" />
+          <Property Name="reason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="patients" Relationship="ArmDentalModel.FK_appointment_patients" FromRole="appointment" ToRole="patients" />
         </EntityType>
-        <EntityType Name="denstist">
+        <EntityType Name="consumables">
           <Key>
-            <PropertyRef Name="id_denstist" />
+            <PropertyRef Name="id_consumable" />
           </Key>
-          <Property Name="id_denstist" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="denstist_first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="denstist_last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="speciality" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="login_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="login" Relationship="ArmDentalModel.FK_denstist_login" FromRole="denstist" ToRole="login" />
-          <NavigationProperty Name="med_history" Relationship="ArmDentalModel.FK_med_history_denstist" FromRole="denstist" ToRole="med_history" />
+          <Property Name="id_consumable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nozzle" Type="Int32" />
+          <Property Name="anesthesia" Type="Int32" />
+          <Property Name="crown" Type="Int32" />
+          <Property Name="gel" Type="Int32" />
+          <Property Name="vitamins" Type="Int32" />
+          <Property Name="basic_tools" Type="Int32" />
+          <NavigationProperty Name="med_history" Relationship="ArmDentalModel.FK_med_history_consumables" FromRole="consumables" ToRole="med_history" />
         </EntityType>
         <EntityType Name="login">
           <Key>
@@ -201,7 +189,6 @@
           <Property Name="id_login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="login1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="denstist" Relationship="ArmDentalModel.FK_denstist_login" FromRole="login" ToRole="denstist" />
         </EntityType>
         <EntityType Name="med_history">
           <Key>
@@ -212,11 +199,14 @@
           <Property Name="x_ray" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fase" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="desease" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="medication_prior" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="prescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="dentist_id" Type="Int32" Nullable="false" />
           <Property Name="current_health" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="denstist" Relationship="ArmDentalModel.FK_med_history_denstist" FromRole="med_history" ToRole="denstist" />
+          <Property Name="description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="cost" Type="Int32" />
+          <Property Name="complication" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mkb" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="consumable_id" Type="Int32" />
+          <NavigationProperty Name="consumables" Relationship="ArmDentalModel.FK_med_history_consumables" FromRole="med_history" ToRole="consumables" />
           <NavigationProperty Name="patients" Relationship="ArmDentalModel.FK_med_history_patients" FromRole="med_history" ToRole="patients" />
         </EntityType>
         <EntityType Name="mkb_codes">
@@ -236,6 +226,8 @@
           <Property Name="patient_first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="patient_last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="allergy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="teeth_map" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="appointment" Relationship="ArmDentalModel.FK_appointment_patients" FromRole="patients" ToRole="appointment" />
           <NavigationProperty Name="med_history" Relationship="ArmDentalModel.FK_med_history_patients" FromRole="patients" ToRole="med_history" />
         </EntityType>
@@ -253,31 +245,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_denstist_login">
-          <End Type="ArmDentalModel.login" Role="login" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="ArmDentalModel.denstist" Role="denstist" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="login">
-              <PropertyRef Name="id_login" />
-            </Principal>
-            <Dependent Role="denstist">
-              <PropertyRef Name="login_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_med_history_denstist">
-          <End Type="ArmDentalModel.denstist" Role="denstist" Multiplicity="1">
+        <Association Name="FK_med_history_consumables">
+          <End Type="ArmDentalModel.consumables" Role="consumables" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="ArmDentalModel.med_history" Role="med_history" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="denstist">
-              <PropertyRef Name="id_denstist" />
+            <Principal Role="consumables">
+              <PropertyRef Name="id_consumable" />
             </Principal>
             <Dependent Role="med_history">
-              <PropertyRef Name="dentist_id" />
+              <PropertyRef Name="consumable_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -295,7 +273,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -304,6 +282,7 @@
           <EntitySetMapping Name="appointment">
             <EntityTypeMapping TypeName="ArmDentalModel.appointment">
               <MappingFragment StoreEntitySet="appointment">
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="reason" ColumnName="reason" />
                 <ScalarProperty Name="date_app" ColumnName="date_app" />
                 <ScalarProperty Name="patient_id" ColumnName="patient_id" />
@@ -311,14 +290,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="denstist">
-            <EntityTypeMapping TypeName="ArmDentalModel.denstist">
-              <MappingFragment StoreEntitySet="denstist">
-                <ScalarProperty Name="login_id" ColumnName="login_id" />
-                <ScalarProperty Name="speciality" ColumnName="speciality" />
-                <ScalarProperty Name="denstist_last_name" ColumnName="denstist_last_name" />
-                <ScalarProperty Name="denstist_first_name" ColumnName="denstist_first_name" />
-                <ScalarProperty Name="id_denstist" ColumnName="id_denstist" />
+          <EntitySetMapping Name="consumables">
+            <EntityTypeMapping TypeName="ArmDentalModel.consumables">
+              <MappingFragment StoreEntitySet="consumables">
+                <ScalarProperty Name="basic_tools" ColumnName="basic_tools" />
+                <ScalarProperty Name="vitamins" ColumnName="vitamins" />
+                <ScalarProperty Name="gel" ColumnName="gel" />
+                <ScalarProperty Name="crown" ColumnName="crown" />
+                <ScalarProperty Name="anesthesia" ColumnName="anesthesia" />
+                <ScalarProperty Name="nozzle" ColumnName="nozzle" />
+                <ScalarProperty Name="id_consumable" ColumnName="id_consumable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -334,10 +315,13 @@
           <EntitySetMapping Name="med_history">
             <EntityTypeMapping TypeName="ArmDentalModel.med_history">
               <MappingFragment StoreEntitySet="med_history">
+                <ScalarProperty Name="consumable_id" ColumnName="consumable_id" />
+                <ScalarProperty Name="mkb" ColumnName="mkb" />
+                <ScalarProperty Name="stage" ColumnName="stage" />
+                <ScalarProperty Name="complication" ColumnName="complication" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="current_health" ColumnName="current_health" />
-                <ScalarProperty Name="dentist_id" ColumnName="dentist_id" />
-                <ScalarProperty Name="prescription" ColumnName="prescription" />
-                <ScalarProperty Name="medication_prior" ColumnName="medication_prior" />
                 <ScalarProperty Name="desease" ColumnName="desease" />
                 <ScalarProperty Name="fase" ColumnName="fase" />
                 <ScalarProperty Name="x_ray" ColumnName="x_ray" />
@@ -359,6 +343,8 @@
           <EntitySetMapping Name="patients">
             <EntityTypeMapping TypeName="ArmDentalModel.patients">
               <MappingFragment StoreEntitySet="patients">
+                <ScalarProperty Name="teeth_map" ColumnName="teeth_map" />
+                <ScalarProperty Name="allergy" ColumnName="allergy" />
                 <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
                 <ScalarProperty Name="patient_last_name" ColumnName="patient_last_name" />
                 <ScalarProperty Name="patient_first_name" ColumnName="patient_first_name" />

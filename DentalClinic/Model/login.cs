@@ -14,17 +14,8 @@ namespace DentalClinic.Model
     
     public partial class login
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public login()
-        {
-            this.denstist = new HashSet<denstist>();
-        }
-    
         public int id_login { get; set; }
         public string login1 { get; set; }
         public string password { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<denstist> denstist { get; set; }
     }
 }
