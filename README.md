@@ -1,6 +1,6 @@
-https://img.shields.io/github/repo-size/AlexStrew/DentalClinic
-https://img.shields.io/tokei/lines/github/AlexStrew/DentalClinic
-https://img.shields.io/github/languages/top/AlexStrew/DentalClinic
+![](https://img.shields.io/github/repo-size/AlexStrew/DentalClinic)
+![](https://img.shields.io/tokei/lines/github/AlexStrew/DentalClinic)
+![](https://img.shields.io/github/languages/top/AlexStrew/DentalClinic)
 
 # АРМ DentalClinic🖋
 The purpose of this program is to automate the workplace of a dentist at a clinic
