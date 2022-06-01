@@ -1,5 +1,5 @@
 # АРМ DentalClinic🖋
-Genshin Impact's Hoyolab Daily Check-in Bot is here! The concept is simple, **run once, run forever**. You only need to run it once, then it will continue to run forever (except if you uninstall it ofc tehe)
+The purpose of this program is to automate the workplace of a dentist at a clinic
 
 ![Demo Png](zNkKSB6q2b.png)
 
@@ -7,9 +7,8 @@ Genshin Impact's Hoyolab Daily Check-in Bot is here! The concept is simple, **ru
 
 # Features 🃏
 - An application designed to automate the work of dental staff.
-- If there's no connection, it will wait for a minute. No maximum retry.
 
-# Prerequisites 🎯
+# Requirements 🎯
 - Windows OS
 - Have MySQL Database (5.6 or higher)
 
