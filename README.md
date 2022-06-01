@@ -5,7 +5,7 @@
 # АРМ DentalClinic🖋
 The purpose of this program is to automate the workplace of a dentist at a clinic
 
-![Demo Png](zNkKSB6q2b.png)
+![Demo Png](DentalClinic_y3SEUrKOa7.png)
 
 > #### Disclaimer: Only works on Windows
 
