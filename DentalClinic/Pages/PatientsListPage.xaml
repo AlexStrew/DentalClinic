@@ -32,8 +32,8 @@
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </hc:TextBox.Effect>
             </hc:TextBox>
-            <DatePicker x:Name="SearchByDate" Height="30" Width="150" Margin="50,0,0,0"></DatePicker>
-            <Button x:Name="RefreshByDateButton" Click="RefreshByDateButton_Click" Margin="250,0,0,0"/>
+            <DatePicker IsEnabled="False" x:Name="SearchByDate" Height="30" Width="150" Margin="50,0,0,0"></DatePicker>
+            <Button IsEnabled="False" x:Name="RefreshByDateButton" Click="RefreshByDateButton_Click" Margin="250,0,0,0"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <ComboBox IsEnabled="False" x:Name="SortComboBox"
                           SelectedIndex="0"
